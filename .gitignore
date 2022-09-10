@@ -1,0 +1,6 @@
+/.idea
+
+*.csv
+*.html
+src/*.css
+src/*.css.map

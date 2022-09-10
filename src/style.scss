@@ -1,0 +1,14 @@
+.table {
+
+th {
+    cursor: pointer;
+}
+
+th[data-sort=asc]::after {
+    content: " (ASC)";
+}
+
+th[data-sort=desc]::after {
+    content: " (DESC)";
+}
+}
