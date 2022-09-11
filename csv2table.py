@@ -36,6 +36,11 @@ def main(input, output, doctype):
 
             value_count = 0
             for value in row:
+                try:
+                    number = float(value) if '.' in value else int(value)
+                    value = f'{number:,}'
+                except ValueError:
+                    pass
                 html_row += th(value, _class='header', _id=f'header-{row_count}-{value_count}') if first else td(value, _class='data', _id=f'data-{row_count}-{value_count}')
                 value_count += 1
 
@@ -52,15 +57,18 @@ def main(input, output, doctype):
 
     if not doctype:
         html_file.write(str(html_table))
+        logging.info('Exported JS')
+        html_file.write(script(js_file.read()))
+        logging.info('Exported CSS')
+        html_file.write(style(css_file.read()))
     else:
         doc = dominate.document()
         doc += html_table
+        logging.info('Exported JS')
+        doc.head += script(js_file.read())
+        logging.info('Exported CSS')
+        doc.head += style(css_file.read())
         html_file.write(str(doc))
-
-    logging.info('Exported JS')
-    html_file.write(f'\n<script>{js_file.read()}</script>')
-    logging.info('Exported CSS')
-    html_file.write(f'\n<style>{css_file.read()}</style>')
 
     logging.info('Closing files')
 
