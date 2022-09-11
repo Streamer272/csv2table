@@ -75,8 +75,6 @@ for (const table of tables) {
                 table.children[0].removeChild(row)
             for (const row of output)
                 table.children[0].appendChild(row)
-
-            console.log(sortId, numeric)
         })
     }
 }
