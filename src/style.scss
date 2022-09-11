@@ -1,14 +1,42 @@
+$color-odd: #808080;
+$color-even: #eeeeee;
+
 .table {
+    border-spacing: 0;
 
-th {
-    cursor: pointer;
-}
+    tr {
+        margin: 0;
+        padding: 0;
 
-th[data-sort=asc]::after {
-    content: " (ASC)";
-}
+        &:nth-child(odd):not(:first-of-type) {
+            background-color: $color-odd;
+        }
+        &:nth-child(even) {
+            background-color: $color-even;
+        }
 
-th[data-sort=desc]::after {
-    content: " (DESC)";
-}
+        th, td {
+            margin: 0;
+            padding: .2rem .5rem;
+            border: none;
+
+            &:not(:last-of-type) {
+                border-right: 1px solid #4c4e52;
+            }
+        }
+
+        th {
+            cursor: pointer;
+            font-size: 1.2rem;
+            min-width: 2rem;
+        }
+
+        th[data-sort=asc]::after {
+            content: " (ASC)";
+        }
+
+        th[data-sort=desc]::after {
+            content: " (DESC)";
+        }
+    }
 }

@@ -32,8 +32,6 @@ def main(input, output, doctype):
             if row[0] == 'Timestamp':
                 continue
 
-            print(f'\r{row_count} rows added', end='')
-
             html_row = tr() if first else tr(_class='row', _id=f'row-{row_count}')
 
             value_count = 0
@@ -46,6 +44,8 @@ def main(input, output, doctype):
 
             if first:
                 first = False
+
+            print(f'\r{row_count} rows added', end='')
         print('')
 
     logging.info('Exporting HTML')
