@@ -62,8 +62,14 @@ for (const table of tables) {
                         return aDataId - bDataId
                 }
             })
-            if (sort === 'desc')
+
+            if (sort === 'desc') {
                 output = output.reverse()
+                output.filter(row => document.getElementById(`data-${row.id.split('-')[1]}-${sortId}`)?.innerText === 'None').map(row => {
+                    output.splice(output.indexOf(row), 1)
+                    output.push(row)
+                })
+            }
 
             for (const row of rows)
                 table.children[0].removeChild(row)
