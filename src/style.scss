@@ -1,143 +1,93 @@
-$fg-th: #001219;
-$fg-odd: #001219;
-$fg-even: #001219;
-$bg-th: #c1e5fc;
-$bg-odd: #fefeff;
-$bg-even: #f6f4f9;
+$fg-th: #ffffff;
+//$fg-th: #3954C8;
+$fg-odd: #000000;
+$fg-even: #000000;
+//$bg-th: #ffffff;
+$bg-th: #3954C8;
+$bg-odd: #f3f3f3;
+$bg-even: #ffffff;
 
-.root {
-    width: fit-content;
+.table {
+    border: thin solid grey;
+    border-radius: 1rem;
+    overflow: hidden;
+    border-spacing: 0;
+    font-family: 'Poppins', sans-serif;
 
-    .table {
-        border: 1px solid black;
-        border-radius: 1rem;
-        border-spacing: 0;
-        overflow: hidden;
-
-        tr {
-            margin: 0;
-            padding: 0;
-            border: none;
-            height: 2rem;
-
-            &:first-of-type {
-                color: $fg-th;
-                background-color: $bg-th;
-            }
-
-            &:nth-child(odd):not(:first-of-type) {
-                color: $fg-odd;
-                background-color: $bg-odd;
-            }
-
-            &:nth-child(even) {
-                color: $fg-even;
-                background-color: $bg-even;
-            }
-
-            &:not(:last-of-type) {
-                th, td {
-                    border-bottom: 1px solid black;
-                }
-            }
-
-            th, td {
-                margin: 0;
-                padding: .2rem .5rem;
-                border: none;
-
-                &:not(:last-of-type) {
-                    border-right: 1px solid #4c4e52;
-                }
-            }
-
-            th {
-                color: $fg-th;
-                font-size: 1.25rem;
-                min-width: 2rem;
-                margin: 0;
-                padding: .4rem 1.5rem;
-                cursor: pointer;
-            }
-
-            .data {
-                padding: .1rem .2rem;
-            }
-
-            th[data-sort=asc]::after {
-                content: " $ARROW_DOWN$";
-                margin: 0;
-                padding: 0;
-            }
-
-            th[data-sort=desc]::after {
-                content: " $ARROW_UP$";
-                margin: 0;
-                padding: 0;
-            }
-        }
-    }
-
-    .copied {
-        display: inline-block;
-        position: absolute;
-        opacity: 0;
-        visibility: hidden;
-        transform: scale(.6);
-        $transition: 200ms ease-in-out;
-        transition: opacity $transition, visibility $transition, transform $transition;
-        border-radius: 1rem;
+    tr {
         margin: 0;
-        padding: .4rem .8rem;
-        font-size: 1.1rem;
-        font-weight: bold;
+        padding: 6px;
+        border: thin solid grey;
+	border-bottom: thin solid grey;
 
-        $backdrop-filter: blur(.35rem) brightness(90%) grayscale(20%);
-        @supports (backdrop-filter: $backdrop-filter) {
-            backdrop-filter: $backdrop-filter;
+        &:first-of-type {
+            color: $fg-th;
+            background-color: $bg-th;
+        }
+        &:nth-child(odd):not(:first-of-type) {
+            color: $fg-odd;
+            background-color: $bg-odd;
+        }
+        &:nth-child(even) {
+            color: $fg-even;
+            background-color: $bg-even;
         }
 
-        p {
+        th, td {
             margin: 0;
-            padding: 0;
+            //padding: .2rem .5rem;
+	    padding-left: 10px;
+	    padding-right: 10px;
+	    padding-top: 6px;
+	    padding-bottom: 6px;
+            border-bottom: thin solid grey;
         }
 
-        &.active {
-            opacity: 1;
-            visibility: visible;
-            transform: scale(1);
+        th {
+            color: $fg-th;
+            cursor: pointer;
+            font-size: 1.2rem;
+            min-width: 2rem;
+	    text-align: left;
+	    padding-top: 12px;
+	    padding-bottom: 12px;
+        }
+
+        th[data-sort=asc]::after {
+            content: " (↑)";
+        }
+
+        th[data-sort=desc]::after {
+            content: " (↓)";
         }
     }
 
-    .copy {
-        display: inline-block;
-        border: 1px outset;
-        border-radius: .5rem;
-        background-color: #e5e5e5;
-        margin: .5rem .25rem .25rem 0;
-        padding: .3rem .6rem;
-        cursor: pointer;
-        font-size: 1.1rem;
-        font-weight: bold;
-        float: right;
-
-        p {
-            margin: 0;
-            padding: 0;
-        }
+    tr td:nth-child(3) {
+	text-align: center;
+    }
+    tr td:nth-child(4) {
+	text-align: center;
+    }
+    tr td:nth-child(5) {
+	text-align: center;
+    }
+    tr td:nth-child(6) {
+	text-align: center;
+    }
+    tr td:nth-child(7) {
+	text-align: center;
+    }
+    tr td:nth-child(8) {
+	text-align: center;
     }
 
-    &.copying {
-        .table {
-            tr {
-                td {
-                    cursor: pointer;
-                }
-            }
-        }
-
-        .copy {
-            border: 1px inset;
-        }
+    tr {
+	padding: 6px;
+	border-bottom: thin solid grey;
+    }
+	
+    tr:hover {
+	font-weight: bold;
     }
 }
+
