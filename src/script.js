@@ -1,5 +1,6 @@
 const tables = document.getElementsByClassName('table')
 for (const table of tables) {
+    const root = document.getElementById('root')
     const rows = Array.prototype.slice.call(table.children[0].getElementsByClassName('row'))
 
     const headers = table.getElementsByClassName('header')
@@ -85,7 +86,7 @@ for (const table of tables) {
             return
 
         copyAllowed = true
-        copy.classList.add('active')
+        root.classList.add('copying')
     })
 
     const values = table.getElementsByClassName('data')
@@ -96,7 +97,7 @@ for (const table of tables) {
                 return
 
             copyAllowed = false
-            copy.classList.remove('active')
+            root.classList.remove('copying')
 
             const text = value?.innerText
             if (!text)

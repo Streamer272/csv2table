@@ -7,124 +7,137 @@ $bg-even: #f6f4f9;
 
 .root {
     width: fit-content;
-}
 
-.table {
-    border: 1px solid black;
-    border-radius: 1rem;
-    border-spacing: 0;
-    overflow: hidden;
+    .table {
+        border: 1px solid black;
+        border-radius: 1rem;
+        border-spacing: 0;
+        overflow: hidden;
 
-    tr {
-        margin: 0;
-        padding: 0;
-        border: none;
-        height: 2rem;
-
-        &:first-of-type {
-            color: $fg-th;
-            background-color: $bg-th;
-        }
-        &:nth-child(odd):not(:first-of-type) {
-            color: $fg-odd;
-            background-color: $bg-odd;
-        }
-        &:nth-child(even) {
-            color: $fg-even;
-            background-color: $bg-even;
-        }
-        &:not(:last-of-type) {
-            td {
-                border-bottom: 1px solid black;
-            }
-        }
-
-        th, td {
+        tr {
             margin: 0;
-            padding: .2rem .5rem;
+            padding: 0;
             border: none;
-            cursor: pointer;
+            height: 2rem;
+
+            &:first-of-type {
+                color: $fg-th;
+                background-color: $bg-th;
+            }
+
+            &:nth-child(odd):not(:first-of-type) {
+                color: $fg-odd;
+                background-color: $bg-odd;
+            }
+
+            &:nth-child(even) {
+                color: $fg-even;
+                background-color: $bg-even;
+            }
 
             &:not(:last-of-type) {
-                border-right: 1px solid #4c4e52;
+                th, td {
+                    border-bottom: 1px solid black;
+                }
+            }
+
+            th, td {
+                margin: 0;
+                padding: .2rem .5rem;
+                border: none;
+
+                &:not(:last-of-type) {
+                    border-right: 1px solid #4c4e52;
+                }
+            }
+
+            th {
+                color: $fg-th;
+                font-size: 1.25rem;
+                min-width: 2rem;
+                margin: 0;
+                padding: .4rem 1.5rem;
+                cursor: pointer;
+            }
+
+            .data {
+                padding: .1rem .2rem;
+            }
+
+            th[data-sort=asc]::after {
+                content: " $ARROW_DOWN$";
+                margin: 0;
+                padding: 0;
+            }
+
+            th[data-sort=desc]::after {
+                content: " $ARROW_UP$";
+                margin: 0;
+                padding: 0;
+            }
+        }
+    }
+
+    .copied {
+        display: inline-block;
+        position: absolute;
+        opacity: 0;
+        visibility: hidden;
+        transform: scale(.6);
+        $transition: 200ms ease-in-out;
+        transition: opacity $transition, visibility $transition, transform $transition;
+        border-radius: 1rem;
+        margin: 0;
+        padding: .4rem .8rem;
+        font-size: 1.1rem;
+        font-weight: bold;
+
+        $backdrop-filter: blur(.35rem) brightness(90%) grayscale(20%);
+        @supports (backdrop-filter: $backdrop-filter) {
+            backdrop-filter: $backdrop-filter;
+        }
+
+        p {
+            margin: 0;
+            padding: 0;
+        }
+
+        &.active {
+            opacity: 1;
+            visibility: visible;
+            transform: scale(1);
+        }
+    }
+
+    .copy {
+        display: inline-block;
+        border: 1px outset;
+        border-radius: .5rem;
+        background-color: #e5e5e5;
+        margin: .5rem .25rem .25rem 0;
+        padding: .3rem .6rem;
+        cursor: pointer;
+        font-size: 1.1rem;
+        font-weight: bold;
+        float: right;
+
+        p {
+            margin: 0;
+            padding: 0;
+        }
+    }
+
+    &.copying {
+        .table {
+            tr {
+                td {
+                    cursor: pointer;
+                }
             }
         }
 
-        th {
-            color: $fg-th;
-            font-size: 1.25rem;
-            min-width: 2rem;
-            margin: 0;
-            padding: .4rem 1.5rem;
+        .copy {
+            border: 1px inset;
         }
-
-        .data {
-            padding: .1rem .2rem;
-        }
-
-        th[data-sort=asc]::after {
-            content: " $ARROW_DOWN$";
-            margin: 0;
-            padding: 0;
-        }
-
-        th[data-sort=desc]::after {
-            content: " $ARROW_UP$";
-            margin: 0;
-            padding: 0;
-        }
-    }
-}
-
-.copied {
-    display: inline-block;
-    position: absolute;
-    opacity: 0;
-    visibility: hidden;
-    transform: scale(.6);
-    $transition: 200ms ease-in-out;
-    transition: opacity $transition, visibility $transition, transform $transition;
-    border-radius: 1rem;
-    margin: 0;
-    padding: .4rem .8rem;
-    font-size: 1.1rem;
-    font-weight: bold;
-
-    $backdrop-filter: blur(.35rem) brightness(90%) grayscale(20%);
-    @supports (backdrop-filter: $backdrop-filter) {
-        backdrop-filter: $backdrop-filter;
-    }
-
-    p {
-        margin: 0;
-        padding: 0;
-    }
-
-    &.active {
-        opacity: 1;
-        visibility: visible;
-        transform: scale(1);
-    }
-}
-
-.copy {
-    display: inline-block;
-    border: 1px outset;
-    border-radius: .5rem;
-    background-color: #e5e5e5;
-    margin: .5rem .25rem .25rem 0;
-    padding: .3rem .6rem;
-    cursor: pointer;
-    font-size: 1.1rem;
-    font-weight: bold;
-    float: right;
-
-    p {
-        margin: 0;
-        padding: 0;
-    }
-
-    &.active {
-        border: 1px inset;
     }
 }

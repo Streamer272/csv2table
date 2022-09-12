@@ -1,7 +1,7 @@
 import csv
 import logging
+
 import click
-import dominate
 from dominate.tags import *
 
 
@@ -64,7 +64,7 @@ def main(input, output, doctype):
     css = css_file.read().replace("$ARROW_UP$", "\\1F815").replace("$ARROW_DOWN$", "\\1F817")
 
     logging.info('Exporting HTML')
-    html_file.write('<div class="root">')
+    html_file.write('<div class="root" id="root">')
     html_file.write(str(html_table))
     html_file.write(str(copied_div))
     html_file.write(str(copy_div))
