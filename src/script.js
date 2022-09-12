@@ -77,4 +77,25 @@ for (const table of tables) {
                 table.children[0].appendChild(row)
         })
     }
+
+    const values = table.getElementsByClassName('data')
+    let copiedTimeoutId = 0
+    for (const value of values) {
+        value.addEventListener('click', async (event) => {
+            const text = value?.innerText
+            if (!text)
+                return
+
+            await navigator.clipboard.writeText(text)
+
+            const copied = document.getElementById('copied')
+            copied.classList.add('active')
+            copied.style.top = `${event.clientY}px`
+            copied.style.left = `${event.clientX}px`
+
+            if (copiedTimeoutId)
+                clearTimeout(copiedTimeoutId)
+            copiedTimeoutId = setTimeout(() => copied.classList.remove('active'), 3000)
+        })
+    }
 }

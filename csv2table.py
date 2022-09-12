@@ -53,22 +53,17 @@ def main(input, output, doctype):
             print(f'\r{row_count} rows added', end='')
         print('')
 
-    logging.info('Exporting HTML')
+    copied_div = div(_class='copied', _id='copied')
+    with copied_div:
+        p('Copied to clipboard!')
 
-    if not doctype:
-        html_file.write(str(html_table))
-        logging.info('Exported JS')
-        html_file.write(script(js_file.read()))
-        logging.info('Exported CSS')
-        html_file.write(style(css_file.read()))
-    else:
-        doc = dominate.document()
-        doc += html_table
-        logging.info('Exported JS')
-        doc.head += script(js_file.read())
-        logging.info('Exported CSS')
-        doc.head += style(css_file.read())
-        html_file.write(str(doc))
+    logging.info('Exporting HTML')
+    html_file.write(str(html_table))
+    html_file.write(str(copied_div))
+    logging.info('Exported JS')
+    html_file.write(f'\n<script>\n{js_file.read()}</script>')
+    logging.info('Exported CSS')
+    html_file.write(f'\n<style>\n{css_file.read()}</style>')
 
     logging.info('Closing files')
 
