@@ -56,14 +56,23 @@ def main(input, output, doctype):
     copied_div = div(_class='copied', _id='copied')
     with copied_div:
         p('Copied to clipboard!')
+    copy_div = button(_class='copy', _id='copy')
+    with copy_div:
+        p('Copy')
+
+    js = js_file.read()
+    css = css_file.read().replace("$ARROW_UP$", "\\1F815").replace("$ARROW_DOWN$", "\\1F817")
 
     logging.info('Exporting HTML')
+    html_file.write('<div class="root">')
     html_file.write(str(html_table))
     html_file.write(str(copied_div))
+    html_file.write(str(copy_div))
     logging.info('Exported JS')
-    html_file.write(f'\n<script>\n{js_file.read()}</script>')
+    html_file.write(f'\n<script>\n{js}</script>')
     logging.info('Exported CSS')
-    html_file.write(f'\n<style>\n{css_file.read()}</style>')
+    html_file.write(f'\n<style>\n{css}</style>')
+    html_file.write('</div>')
 
     logging.info('Closing files')
 

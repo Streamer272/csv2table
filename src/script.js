@@ -78,10 +78,26 @@ for (const table of tables) {
         })
     }
 
+    const copy = document.getElementById('copy')
+    let copyAllowed = false
+    copy.addEventListener('click', () => {
+        if (copyAllowed)
+            return
+
+        copyAllowed = true
+        copy.classList.add('active')
+    })
+
     const values = table.getElementsByClassName('data')
     let copiedTimeoutId = 0
     for (const value of values) {
         value.addEventListener('click', async (event) => {
+            if (!copyAllowed)
+                return
+
+            copyAllowed = false
+            copy.classList.remove('active')
+
             const text = value?.innerText
             if (!text)
                 return
@@ -90,8 +106,8 @@ for (const table of tables) {
 
             const copied = document.getElementById('copied')
             copied.classList.add('active')
-            copied.style.top = `${event.clientY}px`
-            copied.style.left = `${event.clientX}px`
+            copied.style.top = `${event.clientY + window.scrollY}px`
+            copied.style.left = `${event.clientX + window.scrollX}px`
 
             if (copiedTimeoutId)
                 clearTimeout(copiedTimeoutId)

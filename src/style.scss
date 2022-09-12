@@ -5,6 +5,10 @@ $bg-th: #c1e5fc;
 $bg-odd: #fefeff;
 $bg-even: #f6f4f9;
 
+.root {
+    width: fit-content;
+}
+
 .table {
     border: 1px solid black;
     border-radius: 1rem;
@@ -59,11 +63,15 @@ $bg-even: #f6f4f9;
         }
 
         th[data-sort=asc]::after {
-            content: " 🠗";
+            content: " $ARROW_DOWN$";
+            margin: 0;
+            padding: 0;
         }
 
         th[data-sort=desc]::after {
-            content: " 🠕";
+            content: " $ARROW_UP$";
+            margin: 0;
+            padding: 0;
         }
     }
 }
@@ -96,5 +104,27 @@ $bg-even: #f6f4f9;
         opacity: 1;
         visibility: visible;
         transform: scale(1);
+    }
+}
+
+.copy {
+    display: inline-block;
+    border: 1px outset;
+    border-radius: .5rem;
+    background-color: #e5e5e5;
+    margin: .5rem .25rem .25rem 0;
+    padding: .3rem .6rem;
+    cursor: pointer;
+    font-size: 1.1rem;
+    font-weight: bold;
+    float: right;
+
+    p {
+        margin: 0;
+        padding: 0;
+    }
+
+    &.active {
+        border: 1px inset;
     }
 }
