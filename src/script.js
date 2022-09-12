@@ -32,7 +32,9 @@ for (const table of tables) {
             }
 
             const sortId = +header.id.split('-')[2]
-            const numeric = rows.some(row => !isNaN(+(document.getElementById(`data-${row.id.split('-')[1]}-${sortId}`)?.innerText ?? 'a')))
+            const numericRegex = /[,.0-9]*/g
+            const convertToSortable = (str) => (str ?? 'a').match(numericRegex).join('') === str ? str.replaceAll(',', '') : str
+            const numeric = rows.some(row => !isNaN(+convertToSortable(document.getElementById(`data-${row.id.split('-')[1]}-${sortId}`)?.innerText ?? 'a')))
 
             let output = rows.sort((a, b) => {
                 const aData = document.getElementById(`data-${a.id.split('-')[1]}-${sortId}`)
@@ -42,15 +44,18 @@ for (const table of tables) {
                 if (!bData)
                     return -1
 
+                const aText = convertToSortable(aData?.innerText)
+                const bText = convertToSortable(bData?.innerText)
+
                 if (['asc', 'desc'].includes(sort)) {
                     if (numeric) {
-                        if (isNaN(+(aData?.innerText ?? 'a')))
+                        if (isNaN(+(aText ?? 'a')))
                             return 1
-                        if (isNaN(+(bData?.innerText ?? 'a')))
+                        if (isNaN(+(bText ?? 'a')))
                             return -1
-                        return +aData.innerText - +bData.innerText
+                        return +aText - +bText
                     } else
-                        return (aData?.innerText ?? '').localeCompare(bData?.innerText ?? '')
+                        return (aText ?? '').localeCompare(bText ?? '')
                 }
                 else {
                     const aRowId = +aData.id.split('-')[1]
